@@ -17,7 +17,7 @@ public class TwoSum {
         return ans;
     }
     //O(n)
-    public static int[] optimized(int nums[],int target){
+    public static int[] optimizedTime(int nums[],int target){
         HashMap<Integer, Integer> map = new HashMap<>();
         int[] ans = new int[2];
         for(int i=0; i<nums.length; i++){
@@ -28,6 +28,24 @@ public class TwoSum {
             }
             map.put(nums[i] , i);
         }
+        return ans;
+    }
+    //O(n) time O(1)space//as the array is getting sorted so the index will change this is for already sorted
+    //Two Sum 2 problem
+    public static int[] optimizedTimeAndSpace(int nums[],int target){
+        Arrays.sort(nums);
+        int ans[]=new int[2];
+        int left=0;
+        int right=nums.length-1;
+        while (nums[left]+nums[right]!=target) {
+            if(nums[left]+nums[right]<target){
+                left++;
+            }else{
+                right--;
+            }
+        }
+        ans[0]=nums[left];
+        ans[1]=nums[right];
         return ans;
     }
     public static void main(String args[]){
@@ -43,7 +61,10 @@ public class TwoSum {
         int target = sc.nextInt();
         int[] bruteResult = bruteforce(arr, target);
         System.out.println("Brute Force Answer: " + Arrays.toString(bruteResult));
-        int[]optimizedResult=optimized(arr, target);
+        int[]optimizedResult=optimizedTime(arr, target);
         System.out.println("Optimized result:"+Arrays.toString(optimizedResult));
+        int[]optimizedTwoResult=optimizedTimeAndSpace(arr, target);
+        System.out.println("Optimized result2:"+Arrays.toString(optimizedTwoResult));
+        
     }
 }
